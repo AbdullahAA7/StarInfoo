@@ -12,7 +12,7 @@ const {
   destroyListing,
 } = require("../controller/listings.js");
 const multer = require("multer");
-const { storage } = require("../cloudConfig.js");
+const { storage } = require("../Cloud/cloudConfig.js");
 const upload = multer({ storage });
 
 router
