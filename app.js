@@ -20,9 +20,7 @@ const listingsRouter = require("./routes/listings.js");
 const reviewsRouter = require("./routes/reviews.js");
 const usersRouter = require("./routes/users.js");
 
-// const Local_MONGO_Url = "mongodb://localhost:27017/Project";
-// const Mongo_URL = process.env.ATLASDB_URL;
-const ATLASDB_URL = process.env.ATLASDB_URL;
+const MONGO_URL = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
@@ -33,7 +31,7 @@ main()
   });
 
 async function main() {
-  await mongoose.connect(ATLASDB_URL);
+  await mongoose.connect(MONGO_URL);
 }
 
 app.set("view engine", "ejs");
@@ -44,7 +42,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-  mongoUrl: ATLASDB_URL,
+  mongoUrl: MONGO_URL,
   crypto: {
     secret: process.env.SECRET,
   },
