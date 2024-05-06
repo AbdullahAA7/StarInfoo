@@ -20,18 +20,20 @@ const listingsRouter = require("./routes/listings.js");
 const reviewsRouter = require("./routes/reviews.js");
 const usersRouter = require("./routes/users.js");
 
-const mongoAtlasUrl = process.env.ATLAS_DB_URL;
+// const Local_MONGO_Url = "mongodb://localhost:27017/Project";
+// const Mongo_URL = process.env.ATLASDB_URL;
+const ATLASDB_URL = process.env.ATLASDB_URL;
 
 main()
   .then(() => {
     console.log("Successfully connected to Database");
   })
   .catch((err) => {
-    coonsole.log("error ocurs");
+    console.log("error ocurs", err);
   });
 
 async function main() {
-  await mongoose.connect(mongoAtlasUrl);
+  await mongoose.connect(ATLASDB_URL);
 }
 
 app.set("view engine", "ejs");
@@ -42,7 +44,7 @@ app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 const store = MongoStore.create({
-  mongoUrl: mongoAtlasUrl,
+  mongoUrl: ATLASDB_URL,
   crypto: {
     secret: process.env.SECRET,
   },
@@ -52,6 +54,7 @@ const store = MongoStore.create({
 store.on("error", (err) => {
   console.log("ERROR IN MONGO SESSION STOORE", err);
 });
+
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
