@@ -21,6 +21,7 @@ const reviewsRouter = require("./routes/reviews.js");
 const usersRouter = require("./routes/users.js");
 
 const MONGO_URL = process.env.ATLASDB_URL;
+const port = process.env.PORT || 3000;
 
 main()
   .then(() => {
@@ -98,6 +99,6 @@ app.use((err, req, res, next) => {
   res.status(status).render("listings/error.ejs", { message });
 });
 
-app.listen(3000, "0.0.0.0", (req, res) => {
+app.listen(port, "0.0.0.0", (req, res) => {
   console.log("App is litening on port 8080");
 });
