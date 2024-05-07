@@ -98,6 +98,6 @@ app.use((err, req, res, next) => {
   res.status(status).render("listings/error.ejs", { message });
 });
 
-app.listen(8080, (req, res) => {
+app.listen(3000, "0.0.0.0", (req, res) => {
   console.log("App is litening on port 8080");
 });
